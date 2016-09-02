@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import GoogleMobileAds
+// ca-app-pub-8448074232552599/9462362063
 
 class SettingsViewController: UIViewController,UITextFieldDelegate {
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
+    var interstital: GADInterstitial!
+
 
     let _userDefault = NSUserDefaults.standardUserDefaults()
     @IBOutlet weak var _userName: UITextField!
@@ -53,10 +57,31 @@ class SettingsViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var _resetText: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        interstital = GADInterstitial(adUnitID: "ca-app-pub-8448074232552599/9462362063")
+        
+        let request = GADRequest()
+        interstital.loadRequest(request)
         
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    func CreateAd() -> GADInterstitial {
+        
+        let interstital = GADInterstitial(adUnitID: "ca-app-pub-8448074232552599/9462362063")
+        
+        interstital.loadRequest(GADRequest())
+        return interstital
+        
+    }
+
+       override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
+        print(interstital.isReady)
+        if (interstital.isReady) {
+            
+            interstital.presentFromRootViewController(self)
+            interstital = CreateAd()
+            
+        }
+
 
     }
 }

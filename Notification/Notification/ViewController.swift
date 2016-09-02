@@ -15,6 +15,7 @@ class ViewController: UIViewController, ESTBeaconManagerDelegate, GADBannerViewD
     var _minor:Int?
     let b:beac = beac()
     
+    
 
     @IBOutlet weak var _banner: GADBannerView!
     //DisplayBeacons RSSI
@@ -23,7 +24,7 @@ class ViewController: UIViewController, ESTBeaconManagerDelegate, GADBannerViewD
 
     
     @IBAction func settingsPressed(sender: AnyObject) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+               let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
         let resultViewController = storyBoard.instantiateViewControllerWithIdentifier("settings") as! SettingsViewController
         self.presentViewController(resultViewController, animated: true, completion: nil)
@@ -64,6 +65,7 @@ class ViewController: UIViewController, ESTBeaconManagerDelegate, GADBannerViewD
         return uuid
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,6 +97,9 @@ class ViewController: UIViewController, ESTBeaconManagerDelegate, GADBannerViewD
         self.beaconManager.requestAlwaysAuthorization()
         //************************
         loadBanner()
+        
+
+
     }
 
     override func didReceiveMemoryWarning() {
